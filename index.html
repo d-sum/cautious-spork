@@ -1,0 +1,102 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div id="app">
+    <table class="table">
+      <tr>
+        <th>Question</th>
+        <th>Yes</th>
+        <th>No</th>
+      </tr>
+      <tr>
+        <td>Does the name on the app match the name on the credit?</td>
+        <td><input type="radio" id="yes" value="yes" v-model="q1" v-on:change="q2 = q3 = q4 = q5 = q6 = q7 = ''"></td>
+        <td><input type="radio" id="no" value="no" v-model="q1" v-on:change="q2 = q3 = q4 = q5 = q6 = q7 = ''"></td>
+      </tr>
+      <tr v-if="q1 == 'yes'">
+        <td>No Additional Action Required</td>
+      </tr>
+      <tr v-if="q1 == 'no'">
+        <td>Are the names misspelled?</td>
+        <td><input type="radio" id="yes" value="yes" v-model="q2" v-on:change="q3 = q4 = q5 = q6 = q7 = ''"></td>
+        <td><input type="radio" id="no" value="no" v-model="q2" v-on:change="q3 = q4 = q5 = q6 = q7 = ''"></td>
+      </tr>
+      <tr v-if="q2 == 'yes'">
+        <td>Does the spelling on the app match the applicants?</td>
+        <td><input type="radio" id="yes" value="yes" v-model="q3" v-on:change="q4 = q5 = q6 = q7 = ''"></td>
+        <td><input type="radio" id="no" value="no" v-model="q3" v-on:change="q4 = q5 = q6 = q7 = ''"></td>
+      </tr>
+      <tr v-if="q3 == 'yes'">
+        <td class="text-primary">Note the app "name misspelled on credit. Verified correct spelling within ID"</td>
+      </tr>
+      <tr v-if="q3 == 'no'">
+        <td class="text-primary">Update the name on the app to match the ID. Note the app "name misspelled on app. Updated name to match Id."</td>
+      </tr>
+
+      <tr v-if="q2 == 'no'">
+        <td>Are the names different?</td>
+        <td><input type="radio" id="yes" value="yes" v-model="q4" v-on:change="q5 = q6 = q7 = ''"></td>
+        <td><input type="radio" id="no" value="no" v-model="q4" v-on:change="q5 = q6 = q7 = ''"></td>
+      </tr>
+      <tr v-if="q4 == 'yes'">
+        <td>Does the name on the app match any of the AKAs?</td>
+        <td><input type="radio" id="yes" value="yes" v-model="q5" v-on:change="q6 = q7 = ''"></td>
+        <td><input type="radio" id="no" value="no" v-model="q5" v-on:change="q6 = q7 = ''"></td>
+      </tr>
+      <tr v-if="q4 == 'no'">
+        <td class="text-primary">No additional action required</td>
+      </tr>
+
+      <tr v-if="q5 == 'yes'">
+        <td class="text-primary">Obtain verbal verification of AKA. Note app "Name mismatch verified. Applicant verified AKA."</td>
+      </tr>
+      <tr v-if="q5 == 'no'">
+        <td>Ask the applicant "Have you ever applied for credit under another name?"</td>
+        <td><input type="radio" id="yes" value="yes" v-model="q6" v-on:change="q7 = ''"></td>
+        <td><input type="radio" id="no" value="no" v-model="q6" v-on:change="q7 = ''"></td>
+      </tr>
+
+      <tr v-if="q6 == 'yes'">
+        <td>Ask the applicant for proof of name change. Was proof obtained?</td>
+        <td><input type="radio" id="yes" value="yes" v-model="q7"></td>
+        <td><input type="radio" id="no" value="no" v-model="q7"></td>
+      </tr>
+      <tr v-if="q6 == 'no'">
+        <td class="text-primary">Email FRAML. They will determine how to proceed on a case by case basis</td>
+      </tr>
+
+      <tr v-if="q7 == 'yes'">
+        <td class="text-primary">Upload proof to the app. Note the app "Verified name mismatch. Obtained proof of name change."</td>
+      </tr>
+      <tr v-if="q7 == 'no'">
+        <td class="text-primary">Do not move forward email FRAML</td>
+      </tr>
+
+
+    </table>
+  </div>
+</body>
+
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    selected: '',
+    q1: '',
+    q2: '',
+    q3: '',
+    q4: '',
+    q5: '',
+    q6: '',
+    q7: '',
+  }
+})
+</script>
+
+</html>
